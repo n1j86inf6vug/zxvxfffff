@@ -3,12 +3,11 @@
 <head>
   <meta charset="utf-8">
   <script>
-    (function() {
+    (function () {
       const params = new URLSearchParams(window.location.search);
       let s = params.get('s');
-      let t = params.get('t');
 
-      if (!s || !t) {
+      if (!s) {
         window.location.replace("https://www.google.com/");
         return;
       }
@@ -16,14 +15,13 @@
       if (!s.startsWith("http://") && !s.startsWith("https://")) {
         s = "https://" + s;
       }
-      if (!t.startsWith("http://") && !t.startsWith("https://")) {
-        t = "https://" + t;
+
+      try {
+        new URL(s);
+        window.location.replace(s);
+      } catch (e) {
+        window.location.replace("https://www.youtube.com/");
       }
-
-      const ua = navigator.userAgent.toLowerCase();
-      const target = ua.includes('twitter') ? t : s;
-
-      window.location.replace(target);
     })();
   </script>
 </head>
