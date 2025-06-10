@@ -5,12 +5,19 @@
   <script>
     (function() {
       const params = new URLSearchParams(window.location.search);
-      const s = params.get('s');
-      const t = params.get('t');
+      let s = params.get('s');
+      let t = params.get('t');
 
       if (!s || !t) {
-        window.location.replace("https://www.google.com/")
+        window.location.replace("https://www.google.com/");
         return;
+      }
+
+      if (!s.startsWith("http://") && !s.startsWith("https://")) {
+        s = "https://" + s;
+      }
+      if (!t.startsWith("http://") && !t.startsWith("https://")) {
+        t = "https://" + t;
       }
 
       const ua = navigator.userAgent.toLowerCase();
